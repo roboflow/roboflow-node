@@ -1,7 +1,7 @@
 {
   "name": "roboflow",
   "version": "0.0.14",
-  "description": "Roboflow.ai node module and CLI tools",
+  "description": "Roboflow.com node module",
   "main": "index.js",
   "scripts": {
     "test": "jest"
@@ -10,23 +10,11 @@
     "type": "git",
     "url": "git+https://github.com/roboflow-ai/roboflow-node.git"
   },
-  "bin": {
-    "roboflow": "./cli/index.js"
-  },
   "dependencies": {
-    "@roboflow/annotation": "^1.0.141",
-    "axios": "^0.27.2",
-    "chalk": "^4.1.2",
-    "commander": "^9.4.0",
+    "axios": "^0.27.2",    
     "conf": "^10.2.0",
-    "enquirer": "^2.3.6",
     "form-data": "^4.0.0",
-    "glob": "^8.0.3",
-    "install": "^0.13.0",
-    "npm": "^8.19.2",
-    "open": "^8.4.0",
-    "p-limit": "^3.1.0",
-    "terminal-link": "^2.1.1"
+    "p-limit": "^3.1.0"
   },
   "devDependencies": {
     "jest": "^29.2.2",
