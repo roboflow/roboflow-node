@@ -11,13 +11,14 @@
     "url": "git+https://github.com/roboflow-ai/roboflow-node.git"
   },
   "dependencies": {
-    "axios": "^0.27.2",    
+    "axios": "^0.27.2",
     "conf": "^10.2.0",
     "form-data": "^4.0.0",
     "p-limit": "^3.1.0"
   },
   "devDependencies": {
-    "jest": "^29.2.2",
+    "dotenv": "^16.3.1",
+    "jest": "^29.6.1",
     "prettier": "^2.7.1"
   },
   "keywords": [
