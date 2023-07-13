@@ -202,6 +202,52 @@ async function semanticSegmentation(filepath, modelUrl, apiKey) {
     return response.data;
 }
 
+async function embedImage(filepath, apiKey) {
+    const image = fs.readFileSync(filepath, {
+        encoding: "base64"
+    });
+    const response = await axios({
+        method: "POST",
+        url: `${config.get("RF_CLIP_URL")}/embed_image`,
+        params: {
+            api_key: apiKey
+        },
+        data: {
+            clip_version_id: "ViT-B-16",
+            image: [
+                {
+                  type: "base64",
+                  value: image
+                }
+              ]
+        },
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    return response.data;
+}
+
+async function embedText(text, apiKey) {
+    const response = await axios({
+        method: "POST",
+        url: `${config.get("RF_CLIP_URL")}/embed_text`,
+        params: {
+            api_key: apiKey
+        },
+        data: {
+            clip_version_id: "ViT-B-16",
+            text: text
+        },
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    return response.data;
+}
+
 module.exports = api = {
     getWorkspace,
     getProject,
@@ -213,5 +259,7 @@ module.exports = api = {
     classify,
     instanceSegmentation,
     semanticSegmentation,
+    embedImage,
+    embedText,
     uploadAnnotationRaw
 };

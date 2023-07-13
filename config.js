@@ -12,7 +12,8 @@ const DEFAULTS = {
     RF_OBJECT_DETECTION_URL: "https://detect.roboflow.com",
     RF_CLASSIFICATION_URL: "https://classify.roboflow.com",
     RF_INSTANCE_SEGMENTATION_URL: "https://outline.roboflow.com",
-    RF_SEMANTIC_SEGMENTATION_URL: "https://segment.roboflow.com"
+    RF_SEMANTIC_SEGMENTATION_URL: "https://segment.roboflow.com",
+    RF_CLIP_URL: "https://infer.roboflow.com/clip"
 };
 
 // env vars take precedence over config values
@@ -56,6 +57,10 @@ module.exports = {
             RF_SEMANTIC_SEGMENTATION_URL: getCascadingConfigValue(
                 "RF_SEMANTIC_SEGMENTATION_URL",
                 "https://segment.roboflow.com"
+            ),
+            RF_CLIP_URL: getCascadingConfigValue(
+                "RF_CLIP_URL",
+                "https://infer.roboflow.com/clip"
             )
         };
     },
