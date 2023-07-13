@@ -1,6 +1,6 @@
 {
   "name": "roboflow",
-  "version": "0.0.14",
+  "version": "0.2.0",
   "description": "Roboflow.com node module",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/roboflow-ai/roboflow-node.git"
+    "url": "git+https://github.com/roboflow/roboflow-node.git"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -30,7 +30,7 @@
   "author": "Roboflow",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/roboflow-ai/roboflow-node/issues"
+    "url": "https://github.com/roboflow/roboflow-node/issues"
   },
-  "homepage": "https://github.com/roboflow-ai/roboflow-node#readme"
+  "homepage": "https://github.com/roboflow/roboflow-node#readme"
 }
