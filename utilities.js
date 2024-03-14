@@ -37,7 +37,7 @@ async function resizeImage(imagePath) {
 
             // Convert the buffer to a base64 string and return
             const base64 = buffer.toString("base64");
-            return `data:image/jpeg;base64,${base64}`;
+            return `data:image/${fileExtension.slice(1)};base64,${base64}`;
         } else {
             // Image does not need resizing, return original image as base64
             const originalBuffer = fs.readFileSync(imagePath);

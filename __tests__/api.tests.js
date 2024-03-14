@@ -26,9 +26,21 @@ test("Upload Image", async () => {
     expect(uploadImageRes).toHaveProperty("id");
 });
 
-test("Object Detection", async () => {
+// Object detection oversized
+test("Object Detection with resize", async () => {
     let detectImageRes = await api.detectObject(
         `__tests__/${oversizedImage}`,
+        `${project}/${version}`,
+        apiKey,
+        true
+    );
+    expect(detectImageRes).toHaveProperty("predictions");
+});
+
+// Object detection no resize
+test("Object Detection no resize", async () => {
+    let detectImageRes = await api.detectObject(
+        `__tests__/${testImage}`,
         `${project}/${version}`,
         apiKey
     );

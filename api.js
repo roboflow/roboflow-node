@@ -32,7 +32,7 @@ async function getVersion(workspaceUrl, projectUrl, version, apiKey) {
 }
 
 async function getFormat(workspaceUrl, projectUrl, version, format, apiKey) {
-    return api_GET(`/${workspaceUrl}/${projectUrl}/${format}`, apiKey);
+    return api_GET(`/${workspaceUrl}/${projectUrl}/${version}/${format}`, apiKey);
 }
 
 async function uploadImage(filepath, projectUrl, apiKey, options) {
@@ -120,7 +120,7 @@ async function uploadAnnotation(imageID, annotationFile, projectUrl, apiKey) {
     }
 }
 
-async function detectObject(filepath, modelUrl, apiKey, options = {}, resize = true) {
+async function detectObject(filepath, modelUrl, apiKey, resize = false, options = {}) {
     const image = resize
         ? await resizeImage(filepath)
         : fs.readFileSync(filepath, {
@@ -143,7 +143,7 @@ async function detectObject(filepath, modelUrl, apiKey, options = {}, resize = t
     return response.data;
 }
 
-async function classify(filepath, modelUrl, apiKey, resize = true) {
+async function classify(filepath, modelUrl, apiKey, resize = false) {
     const image = resize
         ? await resizeImage(filepath)
         : fs.readFileSync(filepath, {
@@ -165,7 +165,7 @@ async function classify(filepath, modelUrl, apiKey, resize = true) {
     return response.data;
 }
 
-async function instanceSegmentation(filepath, modelUrl, apiKey, resize = true) {
+async function instanceSegmentation(filepath, modelUrl, apiKey, resize = false) {
     const image = resize
         ? await resizeImage(filepath)
         : fs.readFileSync(filepath, {
@@ -187,7 +187,7 @@ async function instanceSegmentation(filepath, modelUrl, apiKey, resize = true) {
     return response.data;
 }
 
-async function semanticSegmentation(filepath, modelUrl, apiKey, resize = true) {
+async function semanticSegmentation(filepath, modelUrl, apiKey, resize = false) {
     const image = resize
         ? await resizeImage(filepath)
         : fs.readFileSync(filepath, {
