@@ -36,7 +36,7 @@ async function getFormat(workspaceUrl, projectUrl, version, format, apiKey) {
 async function uploadImage(filepath, projectUrl, apiKey, options) {
     const filename = path.basename(filepath);
 
-    // console.log(filename, split)
+
     const formData = new FormData();
     formData.append("name", filename);
     formData.append("file", fs.createReadStream(filepath));
@@ -69,7 +69,6 @@ async function uploadImage(filepath, projectUrl, apiKey, options) {
 }
 
 async function uploadAnnotationRaw(imageID, annotationName, annotationData, projectUrl, apiKey) {
-    // console.log("uploadAnnotationRaw", imageID, annotationName, annotationData, projectUrl, apiKey);
 
     try {
         const response = await axios({
