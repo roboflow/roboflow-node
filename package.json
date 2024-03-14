@@ -16,6 +16,7 @@
     "conf": "^10.2.0",
     "form-data": "^4.0.0",
     "p-limit": "^3.1.0",
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
     "dotenv": "^16.3.1",

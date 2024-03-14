@@ -4,6 +4,8 @@ const path = require("path");
 const fs = require("fs");
 const FormData = require("form-data");
 
+const { resizeImage } = require("./utilities.js");
+
 async function api_GET(endpoint, apiKey) {
     const RF_API_URL = config.get("RF_API_URL");
     const url = `${RF_API_URL}` + endpoint;
@@ -30,12 +32,11 @@ async function getVersion(workspaceUrl, projectUrl, version, apiKey) {
 }
 
 async function getFormat(workspaceUrl, projectUrl, version, format, apiKey) {
-    return api_GET(`/${workspaceUrl}/${projectUrl}/${version}/${format}`, apiKey);
+    return api_GET(`/${workspaceUrl}/${projectUrl}/${format}`, apiKey);
 }
 
 async function uploadImage(filepath, projectUrl, apiKey, options) {
     const filename = path.basename(filepath);
-
 
     const formData = new FormData();
     formData.append("name", filename);
@@ -69,7 +70,6 @@ async function uploadImage(filepath, projectUrl, apiKey, options) {
 }
 
 async function uploadAnnotationRaw(imageID, annotationName, annotationData, projectUrl, apiKey) {
-
     try {
         const response = await axios({
             method: "POST",
@@ -120,10 +120,12 @@ async function uploadAnnotation(imageID, annotationFile, projectUrl, apiKey) {
     }
 }
 
-async function detectObject(filepath, modelUrl, apiKey, options) {
-    const image = fs.readFileSync(filepath, {
-        encoding: "base64"
-    });
+async function detectObject(filepath, modelUrl, apiKey, options = {}, resize = true) {
+    const image = resize
+        ? await resizeImage(filepath)
+        : fs.readFileSync(filepath, {
+              encoding: "base64"
+          });
 
     const response = await axios({
         method: "POST",
@@ -141,10 +143,12 @@ async function detectObject(filepath, modelUrl, apiKey, options) {
     return response.data;
 }
 
-async function classify(filepath, modelUrl, apiKey) {
-    const image = fs.readFileSync(filepath, {
-        encoding: "base64"
-    });
+async function classify(filepath, modelUrl, apiKey, resize = true) {
+    const image = resize
+        ? await resizeImage(filepath)
+        : fs.readFileSync(filepath, {
+              encoding: "base64"
+          });
 
     const response = await axios({
         method: "POST",
@@ -161,10 +165,12 @@ async function classify(filepath, modelUrl, apiKey) {
     return response.data;
 }
 
-async function instanceSegmentation(filepath, modelUrl, apiKey) {
-    const image = fs.readFileSync(filepath, {
-        encoding: "base64"
-    });
+async function instanceSegmentation(filepath, modelUrl, apiKey, resize = true) {
+    const image = resize
+        ? await resizeImage(filepath)
+        : fs.readFileSync(filepath, {
+              encoding: "base64"
+          });
 
     const response = await axios({
         method: "POST",
@@ -181,10 +187,14 @@ async function instanceSegmentation(filepath, modelUrl, apiKey) {
     return response.data;
 }
 
-async function semanticSegmentation(filepath, modelUrl, apiKey) {
-    const image = fs.readFileSync(filepath, {
-        encoding: "base64"
-    });
+async function semanticSegmentation(filepath, modelUrl, apiKey, resize = true) {
+    const image = resize
+        ? await resizeImage(filepath)
+        : fs.readFileSync(filepath, {
+              encoding: "base64"
+          });
+
+    console.log("semantic segmentation");
 
     const response = await axios({
         method: "POST",
@@ -197,6 +207,8 @@ async function semanticSegmentation(filepath, modelUrl, apiKey) {
             "Content-Type": "application/x-www-form-urlencoded"
         }
     });
+
+    console.log(response.data);
 
     return response.data;
 }
@@ -215,10 +227,10 @@ async function embedImage(filepath, apiKey) {
             clip_version_id: "ViT-B-16",
             image: [
                 {
-                  type: "base64",
-                  value: image
+                    type: "base64",
+                    value: image
                 }
-              ]
+            ]
         },
         headers: {
             "Content-Type": "application/json"
